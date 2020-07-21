@@ -10,7 +10,7 @@ CALL apoc.periodic.iterate(
   "UNWIND range(2000, 2019) AS year RETURN year",
   "WITH 'https://github.com/JeffSackmann/tennis_atp/raw/master/atp_matches_' AS base, year
    LOAD CSV WITH HEADERS FROM base + year + '.csv' AS row
-   WITH row, split(row.score, ' ') AS rawSets WHERE row.tourney_name = 'Australian Open'
+   WITH row, split(row.score, ' ') AS rawSets WHERE row.tourney_name = 'Wimbledon'
    WITH row, row.tourney_date + '_' + row.match_num AS matchId
 
    MERGE (t:Tournament {name: row.tourney_name, year: date(row.tourney_date).year})
